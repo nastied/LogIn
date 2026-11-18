@@ -15,6 +15,8 @@ namespace Longin
         public Form2()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void Form2_Load(object sender, EventArgs e)

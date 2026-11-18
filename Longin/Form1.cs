@@ -18,6 +18,8 @@ namespace Longin
         public Form1()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -25,73 +27,40 @@ namespace Longin
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+            private void button1_Click(object sender, EventArgs e)
         {
-            /*
-            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DataLogIn.mdf;Integrated Security=True;Connect Timeout=30;");
-            SqlDataAdapter sda = new SqlDataAdapter("Select Count(*) From Log where username='" + textBox1.Text + "' and password='" + textBox2.Text + "'", conn);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-
-            if (dt.Rows[0][0].ToString() == "1")
-            {
-                this.Hide();
-                Form2 ss = new Form2();
-                ss.Show();
-            }
-            else
-            {
-                MessageBox.Show("username or/and password incorrect");
-            } 
-            */
-
             string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DataLogIn.mdf;Integrated Security=True;Connect Timeout=30;";
-            SqlConnection conn = new SqlConnection(connectionString);
-            conn.Open();
 
-            string sqlCommand = "SELECT * from Log;";
-            //MessageBox.Show(sqlCommand);
-            SqlCommand cmd = new SqlCommand(sqlCommand, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-
-
-            while (reader.Read())
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                if (reader[1].ToString() == textBox1.Text && reader[2].ToString() == textBox2.Text)
+                string sqlCommand = "SELECT COUNT(1) FROM Log WHERE username = @user AND password = @pass";
+
+                using (SqlCommand cmd = new SqlCommand(sqlCommand, conn))
                 {
-                    i = Convert.ToInt32(reader[0]);
-                    ok = true;
-                    break;
+
+                    cmd.Parameters.AddWithValue("@user", textBox1.Text);
+                    cmd.Parameters.AddWithValue("@pass", textBox2.Text);
+
+                    conn.Open();
+
+                    int matchCount = Convert.ToInt32(cmd.ExecuteScalar());
+
+                    if (matchCount == 1)
+                    {
+                        this.Hide();
+                        Form2 ss = new Form2();
+                        ss.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("username or/and password incorrect");
+                        textBox1.Text = string.Empty;
+                        textBox2.Text = string.Empty;
+                    }
                 }
-                else
-                { 
-                    ok = false;
-                }
             }
-            conn.Close();
-
-            if (ok == true)
-            {
-                conn.Open();
-
-                string sqlCommand1 = "SELECT username and password from Log where id ='" + i + "'";
-                //MessageBox.Show(sqlCommand1);
-                SqlCommand cmd1 = new SqlCommand(sqlCommand, conn);
-                SqlDataReader reader1 = cmd.ExecuteReader();
-
-                this.Hide();
-                Form2 ss = new Form2();
-                ss.Show();
-                ok = true;
-            }
-            else
-            {
-                MessageBox.Show("username or/and password incorrect");
-                textBox1.Text = string.Empty;
-                textBox2.Text = string.Empty;
-            }
-
         }
+
 
         private void label4_Click(object sender, EventArgs e)
         {

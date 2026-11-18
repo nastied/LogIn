@@ -56,7 +56,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.SandyBrown;
             this.groupBox1.Location = new System.Drawing.Point(29, 36);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(368, 397);
+            this.groupBox1.Size = new System.Drawing.Size(925, 397);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sing Up";
@@ -100,10 +100,10 @@
             // 
             this.textBox2.BackColor = System.Drawing.Color.LemonChiffon;
             this.textBox2.Font = new System.Drawing.Font("Palatino Linotype", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(123, 226);
+            this.textBox2.Location = new System.Drawing.Point(124, 231);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(241, 61);
+            this.textBox2.Size = new System.Drawing.Size(781, 61);
             this.textBox2.TabIndex = 3;
             // 
             // textBox1
@@ -112,7 +112,7 @@
             this.textBox1.Font = new System.Drawing.Font("Poor Richard", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.Location = new System.Drawing.Point(123, 125);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(241, 53);
+            this.textBox1.Size = new System.Drawing.Size(781, 53);
             this.textBox1.TabIndex = 2;
             // 
             // pictureBox2
@@ -140,11 +140,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumPurple;
-            this.ClientSize = new System.Drawing.Size(429, 487);
+            this.ClientSize = new System.Drawing.Size(966, 487);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
             this.Text = "create user";
+            this.Load += new System.EventHandler(this.Form3_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
